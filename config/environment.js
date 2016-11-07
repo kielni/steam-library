@@ -20,6 +20,7 @@ module.exports = function(environment) {
     APP: {
       // Here you can pass flags/options to your application instance
       // when it is created
+      LIBRARY: 'http://steam-library.s3-website-us-west-1.amazonaws.com/library.json'
     }
   };
 

@@ -1,0 +1,15 @@
+body {
+    font-size: 16px;
+}
+
+.players-icon {
+    float: right;
+}
+
+.description {
+    margin-bottom: 10px;
+}
+.description.short {
+    max-height: 4em;
+    overflow: hidden;
+}

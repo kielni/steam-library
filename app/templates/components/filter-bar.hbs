@@ -1,0 +1,30 @@
+<h2>{{games.length}} games</h2>
+
+<div class="btn-group players" data-toggle="buttons">
+    <label class="btn btn-primary {{singleChecked:active}}">
+        {{radio-button
+            value="single"
+            groupValue=players
+            changed="playersChanged"
+        }}
+        Single player
+    </label>
+    <label class="btn btn-primary {{bothChecked:active}}">
+        {{radio-button
+            value="both"
+            groupValue=players
+            changed="playersChanged"
+        }}
+        Both
+    </label>
+    <label class="btn btn-primary {{multiChecked:active}}">
+        {{radio-button
+            value="multi"
+            groupValue=players
+            changed="playersChanged"
+        }}
+        Mutli player
+    </label>
+</div>
+
+{{yield}}
