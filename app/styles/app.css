@@ -3,7 +3,7 @@ body {
 }
 
 .players-icon {
-    float: right;
+    font-size: 24px;
 }
 
 .description {
@@ -23,6 +23,7 @@ body {
 .expand {
     text-align: center;
     cursor: pointer;
+    font-size: 18px;
 }
 
 .store {
@@ -32,4 +33,37 @@ body {
 .filter h4 {
     font-size: 14px;
     font-weight: bold;
+}
+
+.sidebar {
+    padding: 0 10px;
+}
+
+.label {
+    margin-right: 5px;
+    margin-bottom: 5px;
+    display: inline-block;
+}
+
+.game-card .header {
+    margin-bottom: 10px;
+    font-size: 18px;
+}
+
+.game-card .header .name {
+    width: 90%;
+    height: 2.5em;
+}
+
+.game-card h3, .game-card .players {
+    height: 2em;
+    margin-top: 0;
+    margin-bottom: 0px;
+    vertical-align: middle;
+    display: table-cell;
+}
+
+.filter-header {
+    font-size: 18px;
+    margin-top: 10px;
 }

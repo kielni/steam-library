@@ -8,7 +8,7 @@ export default Ember.Component.extend({
     }.property('expanded'),
 
     expandClass: function() {
-        return this.get('expanded') ? 'fa-minus' : 'fa-plus';
+        return this.get('expanded') ? 'fa-angle-up' : 'fa-angle-down';
     }.property('expanded'),
 
     actions: {

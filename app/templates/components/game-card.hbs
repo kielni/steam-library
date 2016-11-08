@@ -1,7 +1,14 @@
-<div class="thumbnail">
+<div class="thumbnail game-card">
     <img src="http://cdn.akamai.steamstatic.com/steam/apps/{{game.appid}}/header.jpg" alt="{{game.name}}">
     <div class="caption" data-id="{{game.appid}}">
-        <h3>{{game.name}} <i class="players-icon fa {{game.playersIcon}}" /></h3>
+        <div class="header clearfix">
+            <div class="pull-left name">
+                <h3><div>{{game.name}}</div></h3>
+            </div>
+            <div class="pull-right">
+                <h3><div><i class="players-icon fa {{game.playersIcon}}" /></div></h3>
+            </div>
+        </div>
         <div class="description {{stateClass}}">
             {{game.description}}
         </div>
