@@ -22,6 +22,7 @@ module.exports = function(defaults) {
 
   app.import(app.bowerDirectory + '/bootstrap/dist/js/bootstrap.js');
   app.import('app/styles/slate/bootstrap.min.css');
+  app.import('app/styles/simple-sidebar.css');
   app.import(app.bowerDirectory + '/font-awesome/css/font-awesome.min.css');
   app.import(app.bowerDirectory + '/font-awesome/fonts/fontawesome-webfont.ttf', {
     destDir: 'fonts'
