@@ -9,7 +9,27 @@ body {
 .description {
     margin-bottom: 10px;
 }
-.description.short {
-    max-height: 4em;
+
+.short {
+    height: 4em;
     overflow: hidden;
+}
+
+.links {
+    padding-top: 10px;
+    font-weight: bold;
+}
+
+.expand {
+    text-align: center;
+    cursor: pointer;
+}
+
+.store {
+    text-align: right;
+}
+
+.filter h4 {
+    font-size: 14px;
+    font-weight: bold;
 }

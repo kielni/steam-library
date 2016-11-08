@@ -52,16 +52,33 @@ export default Ember.Controller.extend({
         },
     },
 
+    topTags: function() {
+        return (this.get('orderedTags') || []).slice(0, 20);
+    }.property('orderedTags'),
+
     filteredGames: function() {
         let filters = this.get('filters');
-        if (!filters) {
-            return this.get('model.games');
-        }
-        return this.get('model.games').filter((game) => {
-            return !Object.keys(filters).find((filter) => {
+        let tags = {};
+        let games = this.get('model.games').filter((game) => {
+            var keep = !Object.keys(filters).find((filter) => {
                 return !this.filterFunctions[filter](game, this.filters[filter]);
             });
+            if (!keep) {
+                return false;
+            }
+            (game.tags || []).forEach((tag) => {
+                tags[tag] = (tags[tag] || 0) + 1;
+            });
+            (game.genres || []).forEach((tag) => {
+                tags[tag] = (tags[tag] || 0) + 1;
+            });
+            return true;
         });
+        let sorted = Object.keys(tags).sort((a, b) => {
+            return tags[a] > tags[b] ? -1 : tags[a] === tags[b] ? 0 : 1;
+        });
+        this.set('orderedTags', sorted);
+        return games;
     }.property('filter.players.@each', 'model.games', 'updated'),
 
     actions: {

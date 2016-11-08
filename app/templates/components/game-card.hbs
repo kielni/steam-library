@@ -1,0 +1,28 @@
+<div class="thumbnail">
+    <img src="http://cdn.akamai.steamstatic.com/steam/apps/{{game.appid}}/header.jpg" alt="{{game.name}}">
+    <div class="caption" data-id="{{game.appid}}">
+        <h3>{{game.name}} <i class="players-icon fa {{game.playersIcon}}" /></h3>
+        <div class="description {{stateClass}}">
+            {{game.description}}
+        </div>
+        <div class="tags {{stateClass}}">
+            {{#each game.genres as |genre| }}
+                <span class="label label-default">{{genre}}</span>
+            {{/each}}
+            {{#each game.tags as |tag| }}
+                <span class="label label-default">{{tag}}</span>
+            {{/each}}
+        </div>
+        <div class="links row">
+            <div class="col-md-4 play">
+                <a href="steam://run/{{game.appid}}" target="play" class="play btn btn-default"><i class="fa fa-play" /></a>
+            </div>
+            <div class="col-md-4 expand">
+                <button class="btn btn-default expand"><i class="fa {{expandClass}}" {{action "toggleExpand" game.appid}} /></button>
+            </div>
+            <div class="col-md-4 store">
+                <a href="{{game.url}}" target="store" class="store btn btn-default"><i class="fa fa-shopping-cart" /></a>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,13 +1,14 @@
 <h2>{{games.length}} games</h2>
 
-<div class="btn-group players" data-toggle="buttons">
+<div class="btn-group players filter" data-toggle="buttons">
+    <h4>Players</h4>
     <label class="btn btn-primary {{singleChecked:active}}">
         {{radio-button
             value="single"
             groupValue=players
             changed="playersChanged"
         }}
-        Single player
+        Single
     </label>
     <label class="btn btn-primary {{bothChecked:active}}">
         {{radio-button
@@ -15,7 +16,7 @@
             groupValue=players
             changed="playersChanged"
         }}
-        Both
+        Any
     </label>
     <label class="btn btn-primary {{multiChecked:active}}">
         {{radio-button
@@ -23,7 +24,7 @@
             groupValue=players
             changed="playersChanged"
         }}
-        Mutli player
+        Multi
     </label>
 </div>
 

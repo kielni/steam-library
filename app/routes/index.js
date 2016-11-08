@@ -13,7 +13,7 @@ export default Ember.Route.extend({
                 return game;
             });
             return {
-                games: data
+                games: data.filter((game) => !game.ageRestricted)
             };
         });
     }

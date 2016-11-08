@@ -20,5 +20,11 @@ module.exports = function(defaults) {
   // please specify an object with the list of modules as keys
   // along with the exports of each module as its value.
 
+  app.import(app.bowerDirectory + '/bootstrap/dist/js/bootstrap.js');
+  app.import('app/styles/slate/bootstrap.min.css');
+  app.import(app.bowerDirectory + '/font-awesome/css/font-awesome.min.css');
+  app.import(app.bowerDirectory + '/font-awesome/fonts/fontawesome-webfont.ttf', {
+    destDir: 'fonts'
+  });
   return app.toTree();
 };

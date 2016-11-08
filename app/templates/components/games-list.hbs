@@ -1,32 +1,7 @@
 <div class="row">
 {{#each games as |game|}}
     <div class="col-md-4">
-        <div class="thumbnail">
-            <img src="http://cdn.akamai.steamstatic.com/steam/apps/{{game.appid}}/header.jpg" alt="{{game.name}}">
-            <div class="caption" data-id="{{game.appid}}">
-                <h3>{{game.name}} <i class="players-icon fa {{game.playersIcon}}" /></h3>
-                <div class="description short">
-                    {{game.description}}
-                </div>
-                <div class="expand">
-                    {{#unless game.expanded}}
-                        <a {{action "expand" game.appid}}>more ...</a>
-                    {{/unless}}
-                </div>
-                <div class="tags">
-                    {{#each game.genres as |genre| }}
-                        <span class="label label-default">{{genre}}</span>
-                    {{/each}}
-                    {{#each game.tags as |tag| }}
-                        <span class="label label-default">{{tag}}</span>
-                    {{/each}}
-                </div>
-                <div class="links">
-                    <a href="steam://run/{{game.appid}}" target="play" class="play">play</a>
-                    <a href="{{game.url}}" target="store" class="store">store</a>
-                </div>
-            </div>
-        </div>
+        {{game-card game=game}}
     </div>
 {{/each}}
 </div>
