@@ -1,5 +1,6 @@
 #!/bin/bash
 
+ember build --environment=production
 bucket="s3://steam-library"
 #node_modules/ember-cli/bin/ember build --environment=production
 
@@ -16,7 +17,3 @@ $SYNC --acl public-read --cache-control 'max-age=31536000, public' --exclude '*'
 echo
 echo "* html"
 $SYNC --acl public-read --cache-control 'no-cache' --exclude '*' --include '*.html' --include 'build.txt'
-echo
-aws s3 sync . $bucket/library.json $AWS --exclude '*' --include library.json --acl public-read --cache-control 'max-age=31536000, public' --content-encoding gzip --content-type application/json
-echo "* remove old versions"
-$SYNC --delete
