@@ -13,7 +13,19 @@
 </div>
 
 <div class="filter played">
-    <h4 class="inline">Controller</h4>
+    <h4>Played</h4>
+    <div class="btn-group" data-toggle="buttons">
+        <label class="btn btn-primary {{unplayedChecked:active}}" {{action "playedChanged" false}}>
+            <input type="checkbox" id="unplayed"> No
+        </label>
+        <label class="btn btn-primary {{playedChecked:active}}" {{action "playedChanged" true}}>
+            <input type="checkbox" id="played"> Yes
+        </label>
+    </div>
+</div>
+
+<div class="filter controller">
+    <h4>Controller</h4>
     <label class="checkbox-inline" {{action "controllerChanged"}}>
           <input type="checkbox" data-toggle="toggle">
     </label>

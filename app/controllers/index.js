@@ -39,6 +39,19 @@ export default Ember.Controller.extend({
             });
         },
 
+        // true = played, false = unplayed
+        played(game, value) {
+            if (!value || value.length !== 1) {
+                return true;
+            }
+            let playtime = game.playtime_forever || 0;
+            // played = playtime > 15 minutes
+            if (value[0]) {
+                return playtime > 15;
+            }
+            return playtime <= 15;
+        },
+
         genre(game, value) {
             return true;
         },
