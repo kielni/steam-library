@@ -1,31 +1,21 @@
-<h2>{{games.length}} games</h2>
+<h2 class="filter-header">{{games.length}} games</h2>
 
-<div class="btn-group players filter" data-toggle="buttons">
+<div class="filter">
     <h4>Players</h4>
-    <label class="btn btn-primary {{singleChecked:active}}">
-        {{radio-button
-            value="single"
-            groupValue=players
-            changed="playersChanged"
-        }}
-        Single
-    </label>
-    <label class="btn btn-primary {{bothChecked:active}}">
-        {{radio-button
-            value="both"
-            groupValue=players
-            changed="playersChanged"
-        }}
-        Any
-    </label>
-    <label class="btn btn-primary {{multiChecked:active}}">
-        {{radio-button
-            value="multi"
-            groupValue=players
-            changed="playersChanged"
-        }}
-        Multi
+    <div class="btn-group players" data-toggle="buttons">
+        <label class="btn btn-primary {{singleChecked:active}}" {{action "playersChanged" "single"}}>
+            <input type="checkbox" id="singlePlayer"> Single
+        </label>
+        <label class="btn btn-primary {{multiChecked:active}}" {{action "playersChanged" "multi"}}>
+            <input type="checkbox" id="multiPlayer"> Multi
+        </label>
+    </div>
+</div>
+
+<div class="filter played">
+    <h4 class="inline">Controller</h4>
+    <label class="checkbox-inline" {{action "controllerChanged"}}>
+          <input type="checkbox" data-toggle="toggle">
     </label>
 </div>
 
-{{yield}}

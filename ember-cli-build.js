@@ -20,12 +20,17 @@ module.exports = function(defaults) {
   // please specify an object with the list of modules as keys
   // along with the exports of each module as its value.
 
-  app.import(app.bowerDirectory + '/bootstrap/dist/js/bootstrap.js');
+  app.import(app.bowerDirectory + '/bootstrap/dist/js/bootstrap.min.js');
+  app.import(app.bowerDirectory + '/bootstrap/dist/css/bootstrap.min.css');
+
   app.import('app/styles/slate/bootstrap.min.css');
   app.import('app/styles/simple-sidebar.css');
+
   app.import(app.bowerDirectory + '/font-awesome/css/font-awesome.min.css');
-  app.import(app.bowerDirectory + '/font-awesome/fonts/fontawesome-webfont.ttf', {
-    destDir: 'fonts'
-  });
+  app.import(app.bowerDirectory + '/flat-ui/dist/fonts/fontawesome-webfont.woff', { destDir: 'fonts' });
+  app.import(app.bowerDirectory + '/font-awesome/fonts/fontawesome-webfont.ttf', { destDir: 'fonts' });
+  app.import(app.bowerDirectory + '/font-awesome/fonts/fontawesome-webfont.woff', { destDir: 'fonts' });
+  app.import(app.bowerDirectory + '/bootstrap-toggle/css/bootstrap-toggle.min.css');
+  app.import(app.bowerDirectory + '/bootstrap-toggle/js/bootstrap-toggle.min.js');
   return app.toTree();
 };

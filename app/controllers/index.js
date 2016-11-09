@@ -33,6 +33,10 @@ export default Ember.Controller.extend({
             if (!isSupported) {
                 return true;
             }
+            var features = (game.features || []).concat(game.tags || []);
+            return features.find((f) => {
+                return f.toLowerCase().indexOf('controller') >= 0;
+            });
         },
 
         genre(game, value) {

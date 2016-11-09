@@ -1,5 +1,7 @@
 body {
     font-size: 16px;
+    color: #ffffff;
+    background: #000;
 }
 
 .players-icon {
@@ -30,9 +32,19 @@ body {
     text-align: right;
 }
 
+.filter {
+    margin-bottom: 5px;
+}
+
 .filter h4 {
     font-size: 14px;
     font-weight: bold;
+    margin-bottom: 5px;
+    font-weight: normal;
+}
+
+.filter h4.inline {
+    dislay: inline-block;
 }
 
 .sidebar {
@@ -66,4 +78,9 @@ body {
 .filter-header {
     font-size: 18px;
     margin-top: 10px;
+    margin-bottom: 15px;
+}
+
+.filter {
+    margin-bottom: 5px;
 }
