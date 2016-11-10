@@ -5,27 +5,25 @@ export default Ember.Controller.extend({
     filters: {},
 
     filterFunctions: {
-        // ['single', 'multi']
+        // ['single', 'multi', 'coop']
         players(game, value) {
-            if (!value || value.length !== 1) {
+            if (!value || value.length === 3) {
                 return true;
             }
             /*
             "players": "single" || players": "multi",
+            "tags": ["Singleplayer","Multiplayer", "Co-op"]
+            "features": ["Co-op"]
             */
-            let val = value[0];
-            if (game.players && game.players.indexOf(val) >= 0) {
-                return true;
-            }
-            if (!game.tags) {
-                return false;
-            }
-            /*
-            "tags": ["Singleplayer","Multiplayer",]
-            */
-            let players = val.substr(0, 1).toUpperCase()+val.substr(1);
-            return game.tags.find((tag) => {
-                return tag.indexOf(players) === 0;
+            var data = (game.players || []).concat(game.tags || []).concat(game.features || []);
+            return value.find((val) => {
+                if (val === 'coop') {
+                    return data.indexOf('Co-op') >= 0;
+                }
+                if (data.indexOf(val) >= 0) {
+                    return true;
+                }
+                return data.indexOf(val.substr(0, 1).toUpperCase()+val.substr(1)) >= 0;
             });
         },
 

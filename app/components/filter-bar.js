@@ -20,6 +20,10 @@ export default Ember.Component.extend({
         return Ember.$('#multiPlayer').is(':checked');
     }.property('players'),
 
+    coopChecked: function() {
+        return Ember.$('#coop').is(':checked');
+    }.property('players'),
+
     playedChecked: function() {
         return Ember.$('#played').is(':checked');
     }.property('players'),
