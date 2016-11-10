@@ -17,6 +17,10 @@ body {
     overflow: hidden;
 }
 
+.tags.short {
+    height: 3.5em;
+}
+
 .links {
     padding-top: 10px;
     font-weight: bold;
@@ -83,4 +87,8 @@ body {
 
 .filter {
     margin-bottom: 5px;
+}
+
+.btn-primary.active, .btn-primary.toggle-on {
+    color: #aaffaa;
 }
