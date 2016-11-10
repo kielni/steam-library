@@ -8,9 +8,21 @@ export default Ember.Component.extend({
     setup: function() {
         Ember.$('.controller input[type="checkbox"]').bootstrapToggle({
             on: 'Yes',
-        off: 'Any'
+            off: 'Any'
+        });
+        Ember.$('#tagSelect').select2();
+        Ember.$('#tagSelect').on('change', (e) => {
+            console.log('tags=', Ember.$('#tagSelect').val());
+            let filters =  this.get('filters') || {};
+            filters.tags = Ember.$('#tagSelect').val();
+            this.sendAction('action', filters);
         });
     }.on('didInsertElement'),
+
+    tagsUpdate: function() {
+        console.log('tagsUpdate');
+        Ember.$('#tagSelect').select2();
+    }.observes('tags.[]'),
 
     singleChecked: function() {
         return Ember.$('#singlePlayer').is(':checked');
@@ -31,6 +43,24 @@ export default Ember.Component.extend({
     unplayedChecked: function() {
         return Ember.$('#unplayed').is(':checked');
     }.property('players'),
+
+    addTagToFilter: function() {
+        console.log('add tag '+this.get('filterTag')+' to filter');
+        let tag = this.get('filterTag');
+        if (!tag) {
+            return;
+        }
+        // add to filter
+        let filters =  this.get('filters') || {};
+        let tags = this.get('filters').tags || [];
+        if (tags.indexOf(tag) >= 0) {
+            // already selected; nothing to do
+            return;
+        }
+        // add to select
+        tags.push(tag);
+        Ember.$('#tagSelect').val(tags).trigger('change');
+    }.observes('filterTag'),
 
     actions: {
         playersChanged: function(players) {

@@ -7,7 +7,7 @@ export default Ember.Controller.extend({
     filterFunctions: {
         // ['single', 'multi', 'coop']
         players(game, value) {
-            if (!value || value.length === 3) {
+            if (!value || value.length === 0 || value.length === 3) {
                 return true;
             }
             /*
@@ -50,12 +50,14 @@ export default Ember.Controller.extend({
             return playtime <= 15;
         },
 
-        genre(game, value) {
-            return true;
-        },
-
-        coop(game, isCoop) {
-            return true;
+        tags(game, values) {
+            if (!values || values.length === 0) {
+                return true;
+            }
+            var data = (game.tags || []).concat(game.genres || []);
+            return values.find((val) => {
+                return data.indexOf(val) >= 0;
+            });
         },
 
         starred(game, isStarred) {
@@ -68,7 +70,7 @@ export default Ember.Controller.extend({
     },
 
     topTags: function() {
-        return (this.get('orderedTags') || []).slice(0, 20);
+        return (this.get('orderedTags') || []).slice(0, 20).sort();
     }.property('orderedTags'),
 
     filteredGames: function() {
@@ -99,6 +101,20 @@ export default Ember.Controller.extend({
     actions: {
         onFilter: function(filters) {
             console.log('filter=', filters);
+            this.set('addTag', null);
+            this.set('filters', filters);
+            this.set('updated', (new Date()).getTime());
+        },
+
+        filterTag: function(tag) {
+            let filters = this.get('filters') || {};
+            let tags = filters.tags || [];
+            if (tags.indexOf(tag) > 0) {
+                return;
+            }
+            tags.push(tag);
+            filters.tags = tags;
+            this.set('addTag', tag);
             this.set('filters', filters);
             this.set('updated', (new Date()).getTime());
         }

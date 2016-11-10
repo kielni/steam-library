@@ -34,3 +34,11 @@
     </label>
 </div>
 
+<div class="filter tags">
+    <h4>Tags</h4>
+    <select id="tagSelect" multiple="multiple">
+    {{#each tags as |tag|}}
+        <option>{{tag}}</option>
+    {{/each}}
+    </select>
+</div>

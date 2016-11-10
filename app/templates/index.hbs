@@ -4,12 +4,16 @@
             action="onFilter"
             games=filteredGames
             tags=topTags
+            filterTag=addTag
         }}
     </div>
     <div id="page-content-wrapper">
         <div class="container-fluid">
             <div class="row">
-                {{games-list games=filteredGames}}
+                {{games-list
+                    games=filteredGames
+                    filterTag="filterTag"
+                }}
             </div>
         </div>
     </div>

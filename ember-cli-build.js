@@ -32,5 +32,9 @@ module.exports = function(defaults) {
   app.import(app.bowerDirectory + '/font-awesome/fonts/fontawesome-webfont.woff', { destDir: 'fonts' });
   app.import(app.bowerDirectory + '/bootstrap-toggle/css/bootstrap-toggle.min.css');
   app.import(app.bowerDirectory + '/bootstrap-toggle/js/bootstrap-toggle.min.js');
+
+  app.import(app.bowerDirectory + '/select2/dist/css/select2.min.css');
+  app.import(app.bowerDirectory + '/select2/dist/js/select2.min.js');
+  app.import(app.bowerDirectory + '/select2/dist/js/i18n/en.js');
   return app.toTree();
 };

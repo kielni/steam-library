@@ -13,11 +13,8 @@
             {{game.description}}
         </div>
         <div class="tags {{stateClass}}">
-            {{#each game.genres as |genre| }}
-                <span class="label label-default">{{genre}}</span>
-            {{/each}}
-            {{#each game.tags as |tag| }}
-                <span class="label label-default">{{tag}}</span>
+            {{#each tags as |tag| }}
+                <span class="label label-default" {{action "addTag" tag}}>{{tag}}</span>
             {{/each}}
         </div>
         <div class="links row">
