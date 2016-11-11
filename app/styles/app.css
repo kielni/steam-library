@@ -86,6 +86,10 @@ body {
     display: table-cell;
 }
 
+.game-card h2 {
+    font-size: 18px;
+}
+
 .filter-header {
     font-size: 18px;
     margin-top: 10px;
