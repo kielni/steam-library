@@ -1,0 +1,13 @@
+<div class="container hidden-games">
+    <h1>Hidden games</h1>
+    <div class="row">
+        {{games-list
+            games=filteredGames
+            toggleHide="toggleHide"
+        }}
+    </div>
+    {{#unless filteredGames.length}}
+    No hidden games.
+    {{/unless}}
+</div>
+{{outlet}}

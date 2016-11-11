@@ -136,3 +136,11 @@ body {
 .starred {
     color: #f1c40f;
 }
+
+.hidden-games .row .star {
+    display: none;
+}
+
+.hidden-games .tags .label {
+    cursor: default;
+}
