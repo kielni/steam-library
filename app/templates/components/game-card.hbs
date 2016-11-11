@@ -1,4 +1,4 @@
-<div class="thumbnail game-card">
+<div class="thumbnail game-card {{stateClass}}">
     <img src="http://cdn.akamai.steamstatic.com/steam/apps/{{game.appid}}/header.jpg" alt="{{game.name}}">
     <div class="caption" data-id="{{game.appid}}">
         <div class="header clearfix">
@@ -17,14 +17,26 @@
                 <span class="label label-default" {{action "addTag" tag}}>{{tag}}</span>
             {{/each}}
         </div>
+        <div class="expand">
+            <button class="btn btn-default btn-xs expand">
+                <i class="fa {{expandClass}}" {{action "toggleExpand" game.appid}} />
+            </button>
+        </div>
         <div class="links row">
-            <div class="col-md-4 play">
+            <div class="col-md-3 play text-center">
                 <a href="steam://run/{{game.appid}}" target="play" class="play btn btn-default"><i class="fa fa-play" /></a>
             </div>
-            <div class="col-md-4 expand">
-                <button class="btn btn-default expand"><i class="fa {{expandClass}}" {{action "toggleExpand" game.appid}} /></button>
+            <div class="col-md-3 star text-center">
+                <button class="btn btn-default">
+                    <i class="fa {{starClass}}" {{action "toggleStar"}} />
+                </button>
             </div>
-            <div class="col-md-4 store">
+            <div class="col-md-3 hidden-game text-center">
+                <button class="btn btn-default">
+                    <i class="fa {{hideClass}}" {{action "toggleHide"}} />
+                </button>
+            </div>
+            <div class="col-md-3 store text-center">
                 <a href="{{game.url}}" target="store" class="store btn btn-default"><i class="fa fa-shopping-cart" /></a>
             </div>
         </div>

@@ -14,6 +14,14 @@ export default Ember.Component.extend({
         return tags;
     }.property('genres', 'tags'),
 
+    starClass: function() {
+        return this.get('game.starred') ? 'fa-star starred' : 'fa-star-o';
+    }.property('game.starred'),
+
+    hideClass: function() {
+        return this.get('game.hidden') ? 'fa-eye' : 'fa-minus-circle';
+    }.property('game.hidden'),
+
     stateClass: function() {
         return this.get('expanded') ? 'long' : 'short';
     }.property('expanded'),
@@ -29,6 +37,14 @@ export default Ember.Component.extend({
 
         addTag: function(tag) {
             this.sendAction('filterTag', tag);
+        },
+
+        toggleStar: function() {
+            this.sendAction('toggleStar', this.get('game'));
+        },
+
+        toggleHide: function() {
+            this.sendAction('toggleHide', this.get('game'));
         }
     }
 });

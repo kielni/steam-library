@@ -1,99 +1,87 @@
 import Ember from 'ember';
 
 export default Ember.Component.extend({
-    filters: {
-        players: []
-    },
-
     setup: function() {
         Ember.$('.controller input[type="checkbox"]').bootstrapToggle({
             on: 'Yes',
-            off: 'Any'
+            off: 'All'
         });
-        Ember.$('#tagSelect').select2();
+        Ember.$('.star input[type="checkbox"]').bootstrapToggle({
+            on: '<i class="fa fa-star starred" />',
+            off: 'All'
+        });
+        Ember.$('#tagSelect').select2({tags: true});
         Ember.$('#tagSelect').on('change', (e) => {
-            console.log('tags=', Ember.$('#tagSelect').val());
-            let filters =  this.get('filters') || {};
-            filters.tags = Ember.$('#tagSelect').val();
-            this.sendAction('action', filters);
+            this.sendAction('action', 'tags', Ember.$('#tagSelect').val());
         });
+        this.tagsUpdate();
     }.on('didInsertElement'),
 
     tagsUpdate: function() {
-        console.log('tagsUpdate');
-        Ember.$('#tagSelect').select2();
-    }.observes('tags.[]'),
+        let selected = Ember.$('#tagSelect').val();
+        if (selected.toString() === (this.get('filters.tags') || []).toString()) {
+            return;
+        }
+        let select = Ember.$('#tagSelect').select2();
+        select.val(this.get('filters.tags'));
+        select.trigger('change');
+    }.observes('filters.tags.[]'),
+
+    players: function() {
+        return this.get('filters.players') || [];
+    }.property('filters.players.[]'),
 
     singleChecked: function() {
-        return Ember.$('#singlePlayer').is(':checked');
+        return this.get('players').indexOf('single') >= 0;
     }.property('players'),
 
     multiChecked: function() {
-        return Ember.$('#multiPlayer').is(':checked');
+        return this.get('players').indexOf('multi') >= 0;
     }.property('players'),
 
     coopChecked: function() {
-        return Ember.$('#coop').is(':checked');
+        return this.get('players').indexOf('coop') >= 0;
     }.property('players'),
+
+    played: function() {
+        return this.get('filters.played') || [];
+    }.property('filters.played.[]'),
 
     playedChecked: function() {
-        return Ember.$('#played').is(':checked');
-    }.property('players'),
+        return this.get('played').indexOf(true) >= 0;
+    }.property('played'),
 
     unplayedChecked: function() {
-        return Ember.$('#unplayed').is(':checked');
-    }.property('players'),
+        return this.get('played').indexOf(false) >= 0;
+    }.property('played'),
 
-    addTagToFilter: function() {
-        console.log('add tag '+this.get('filterTag')+' to filter');
-        let tag = this.get('filterTag');
-        if (!tag) {
-            return;
+    toggleListFilter: function(filter, value) {
+        let current = this.get(`filters.${filter}`) || [];
+        let newValues = [];
+        let pos = current.indexOf(value);
+        if (pos >= 0) {
+            newValues = current.filter((val) => val !== value);
+        } else {
+            newValues = current.concat(value);
         }
-        // add to filter
-        let filters =  this.get('filters') || {};
-        let tags = this.get('filters').tags || [];
-        if (tags.indexOf(tag) >= 0) {
-            // already selected; nothing to do
-            return;
-        }
-        // add to select
-        tags.push(tag);
-        Ember.$('#tagSelect').val(tags).trigger('change');
-    }.observes('filterTag'),
+        this.sendAction('action', filter, newValues);
+    },
 
     actions: {
-        playersChanged: function(players) {
-            let filters =  this.get('filters') || {};
-            let current = this.get('filters').players || [];
-            let pos = current.indexOf(players);
-            if (pos < 0) {
-                current.push(players);
-            } else {
-                current.splice(pos, 1);
-            }
-            filters.players = current;
-            this.sendAction('action', filters);
+        clickPlayers: function(clicked) {
+            this.toggleListFilter('players', clicked);
         },
 
-        playedChanged: function(played) {
-            let filters =  this.get('filters') || {};
-            let current = this.get('filters').played || [];
-            let pos = current.indexOf(played);
-            if (pos < 0) {
-                current.push(played);
-            } else {
-                current.splice(pos, 1);
-            }
-            filters.played = current;
-            this.sendAction('action', filters);
+        clickPlayed: function(clicked) {
+            this.toggleListFilter('played', clicked);
         },
 
-        controllerChanged: function() {
-            console.log('played=', Ember.$('input[name="played"]').is(':checked'));
-            let filters =  this.get('filters') || {};
-            filters.controller = !filters.controller;
-            this.sendAction('action', filters);
+        clickController: function() {
+            this.sendAction('action', 'controller', !this.get('filters.controller'));
+        },
+
+        clickStarred: function() {
+            this.sendAction('action', 'starred', !this.get('filters.starred'));
         }
     }
 });

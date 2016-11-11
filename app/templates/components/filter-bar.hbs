@@ -3,14 +3,14 @@
 <div class="filter">
     <h4>Players</h4>
     <div class="btn-group players" data-toggle="buttons">
-        <label class="btn btn-primary {{singleChecked:active}}" {{action "playersChanged" "single"}}>
-            <input type="checkbox" id="singlePlayer"> Single
+        <label class="btn btn-primary {{if singleChecked 'active'}}" {{action "clickPlayers" "single"}}>
+            {{input type="checkbox" id="singlePlayer" checked=singleChecked}} Single
         </label>
-        <label class="btn btn-primary {{multiChecked:active}}" {{action "playersChanged" "multi"}}>
-            <input type="checkbox" id="multiPlayer"> Multi
+        <label class="btn btn-primary {{if multiChecked 'active'}}" {{action "clickPlayers" "multi"}}>
+            {{input type="checkbox" id="multiPlayer" checked=multiChecked}} Multi
         </label>
-        <label class="btn btn-primary {{coopChecked:active}}" {{action "playersChanged" "coop"}}>
-            <input type="checkbox" id="coop"> Co-op
+        <label class="btn btn-primary {{if coopChecked 'active'}}" {{action "clickPlayers" "coop"}}>
+            {{input type="checkbox" id="coop" checked=coopChecked}} Co-op
         </label>
     </div>
 </div>
@@ -18,19 +18,19 @@
 <div class="filter played">
     <h4>Played</h4>
     <div class="btn-group" data-toggle="buttons">
-        <label class="btn btn-primary {{unplayedChecked:active}}" {{action "playedChanged" false}}>
-            <input type="checkbox" id="unplayed"> No
+        <label class="btn btn-primary {{unplayedChecked:active}}" {{action "clickPlayed" false}}>
+            {{input type="checkbox" id="unplayed" checked=unplayedChecked}} No
         </label>
-        <label class="btn btn-primary {{playedChecked:active}}" {{action "playedChanged" true}}>
-            <input type="checkbox" id="played"> Yes
+        <label class="btn btn-primary {{playedChecked:active}}" {{action "clickPlayed" true}}>
+            {{input type="checkbox" id="played" checked=playedChecked}} Yes
         </label>
     </div>
 </div>
 
 <div class="filter controller">
     <h4>Controller</h4>
-    <label class="checkbox-inline" {{action "controllerChanged"}}>
-          <input type="checkbox" data-toggle="toggle">
+    <label class="checkbox-inline" {{action "clickController"}}>
+          <input type="checkbox" data-toggle="toggle" {{filters.controller:checked}}>
     </label>
 </div>
 
@@ -42,3 +42,11 @@
     {{/each}}
     </select>
 </div>
+
+<div class="filter star">
+    <h4>Starred</h4>
+    <label class="checkbox-inline" {{action "clickStarred"}}>
+          <input type="checkbox" data-toggle="toggle" {{filters.starred:checked}}>
+    </label>
+</div>
+
