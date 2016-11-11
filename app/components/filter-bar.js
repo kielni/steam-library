@@ -3,26 +3,32 @@ import Ember from 'ember';
 export default Ember.Component.extend({
     setup: function() {
         Ember.$('.controller input[type="checkbox"]').bootstrapToggle({
-            on: 'Yes',
-            off: 'All'
+            on: 'Controller',
+            off: 'All inputs'
         });
         Ember.$('.star input[type="checkbox"]').bootstrapToggle({
             on: '<i class="fa fa-star starred" />',
-            off: 'All'
+            off: '<i class="fa fa-star-half-full starred" />'
         });
-        Ember.$('#tagSelect').select2({tags: true});
+        this.set('tagSelect', Ember.$('#tagSelect').select2({tags: true}));
         Ember.$('#tagSelect').on('change', (e) => {
-            this.sendAction('action', 'tags', Ember.$('#tagSelect').val());
+            let filters = (this.get('filters.tags') || []);
+            let select = this.get('tagSelect').val();
+            if (select.toString() === filters.toString()) {
+                // filters match select; nothing to do
+                return;
+            }
+            this.sendAction('action', 'tags', select);
         });
         this.tagsUpdate();
     }.on('didInsertElement'),
 
     tagsUpdate: function() {
-        let selected = Ember.$('#tagSelect').val();
+        let select = this.get('tagSelect');
+        let selected = select.val();
         if (selected.toString() === (this.get('filters.tags') || []).toString()) {
             return;
         }
-        let select = Ember.$('#tagSelect').select2();
         select.val(this.get('filters.tags'));
         select.trigger('change');
     }.observes('filters.tags.[]'),
