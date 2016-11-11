@@ -90,6 +90,10 @@ body {
     font-size: 18px;
 }
 
+.game-card img {
+    width: 100%;
+}
+
 .filter-header {
     font-size: 18px;
     margin-top: 10px;
