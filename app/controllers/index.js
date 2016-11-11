@@ -114,7 +114,7 @@ export default Ember.Controller.extend({
 
         filterTag: function(tag) {
             let tags = this.get('filters.tags') || [];
-            if (tags.indexOf(tag) > 0) {
+            if (tags.indexOf(tag) >= 0) {
                 return;
             }
             this.set('filters.tags', tags.concat(tag));
