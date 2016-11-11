@@ -31,8 +31,11 @@ export default Ember.Component.extend({
     }.property('expanded'),
 
     actions: {
-        toggleExpand: function() {
+        toggleExpand: function(appid) {
             this.set('expanded', !this.get('expanded'));
+            if (!this.get('expanded')) {
+                document.getElementById(`game${appid}`).scrollIntoView();
+            }
         },
 
         addTag: function(tag) {
