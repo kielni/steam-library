@@ -17,6 +17,10 @@ body {
     overflow: hidden;
 }
 
+.tags {
+    width: 95%;
+}
+
 .tags.short {
     height: 3.5em;
 }
