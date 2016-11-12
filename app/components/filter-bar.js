@@ -11,7 +11,7 @@ export default Ember.Component.extend({
             off: '<i class="fa fa-star-half-full starred" />'
         });
         this.set('tagSelect', Ember.$('#tagSelect').select2({tags: true}));
-        Ember.$('#tagSelect').on('change', (e) => {
+        Ember.$('#tagSelect').on('change', (/*e*/) => {
             let filters = (this.get('filters.tags') || []);
             let select = this.get('tagSelect').val();
             if (select.toString() === filters.toString()) {
