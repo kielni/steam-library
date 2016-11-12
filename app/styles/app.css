@@ -152,3 +152,11 @@ body {
 .hidden-games .tags .label {
     cursor: default;
 }
+
+.loading {
+    margin-left: 50%;
+    margin-right: 50%;
+    margin-top: 200px;
+    font-size: 72px;
+    color: #aaffaa;
+}
