@@ -6,6 +6,9 @@ module.exports = function(defaults) {
   var app = new EmberApp(defaults, {
     dotEnv: {
       clientAllowedKeys: ['LIBRARY']
+    },
+    gzip: {
+      appendSuffix: false
     }
   });
 
