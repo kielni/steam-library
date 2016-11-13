@@ -21,6 +21,7 @@ export default Ember.Component.extend({
             this.sendAction('action', 'tags', select);
         });
         this.tagsUpdate();
+        this.setInitialState();
     }.on('didInsertElement'),
 
     tagsUpdate: function() {
@@ -33,33 +34,16 @@ export default Ember.Component.extend({
         select.trigger('change');
     }.observes('filters.tags.[]'),
 
-    players: function() {
-        return this.get('filters.players') || [];
-    }.property('filters.players.[]'),
-
-    singleChecked: function() {
-        return this.get('players').indexOf('single') >= 0;
-    }.property('players'),
-
-    multiChecked: function() {
-        return this.get('players').indexOf('multi') >= 0;
-    }.property('players'),
-
-    coopChecked: function() {
-        return this.get('players').indexOf('coop') >= 0;
-    }.property('players'),
-
-    played: function() {
-        return this.get('filters.played') || [];
-    }.property('filters.played.[]'),
-
-    playedChecked: function() {
-        return this.get('played').indexOf(true) >= 0;
-    }.property('played'),
-
-    unplayedChecked: function() {
-        return this.get('played').indexOf(false) >= 0;
-    }.property('played'),
+    setInitialState: function() {
+        let players = this.get('filters.players') || [];
+        ['single', 'multi', 'coop'].forEach((p) => {
+            this.set(`${p}Checked`, players.indexOf(p) >= 0);
+        });
+        let played = this.get('filters.played') || [];
+        ['played', 'unplayed'].forEach((p) => {
+            this.set(`${p}Checked`, played.indexOf(p) >= 0);
+        });
+    },
 
     toggleListFilter: function(filter, value) {
         let current = this.get(`filters.${filter}`) || [];
