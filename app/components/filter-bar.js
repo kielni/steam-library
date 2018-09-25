@@ -1,17 +1,18 @@
-import Ember from 'ember';
+import $ from 'jquery';
+import Component from '@ember/component';
 
-export default Ember.Component.extend({
+export default Component.extend({
     setup: function() {
-        Ember.$('.controller input[type="checkbox"]').bootstrapToggle({
+        $('.controller input[type="checkbox"]').bootstrapToggle({
             on: 'Controller',
             off: 'All inputs'
         });
-        Ember.$('.star input[type="checkbox"]').bootstrapToggle({
+        $('.star input[type="checkbox"]').bootstrapToggle({
             on: '<i class="fa fa-star starred" />',
             off: '<i class="fa fa-star-half-full starred" />'
         });
-        this.set('tagSelect', Ember.$('#tagSelect').select2({tags: true}));
-        Ember.$('#tagSelect').on('change', (/*e*/) => {
+        this.set('tagSelect', $('#tagSelect').select2({tags: true}));
+        $('#tagSelect').on('change', (/*e*/) => {
             let filters = (this.get('filters.tags') || []);
             let select = this.get('tagSelect').val();
             if (select.toString() === filters.toString()) {

@@ -1,10 +1,12 @@
-import Ember from 'ember';
+import EmberObject from '@ember/object';
+import $ from 'jquery';
+import Route from '@ember/routing/route';
 import config from 'steam-library/config/environment';
 
-export default Ember.Route.extend({
+export default Route.extend({
     model() {
         let hidden = JSON.parse(localStorage.getItem('hidden') || '[]');
-        return Ember.$.ajax(config.APP.LIBRARY).then((response) => {
+        return $.ajax(config.APP.LIBRARY).then((response) => {
             let data = response.data.map((game) => {
                 // "players": "Single-player" || players": "Multi-player",
                 if (game.players) {
@@ -13,7 +15,7 @@ export default Ember.Route.extend({
                 }
                 game.hidden = hidden.indexOf(game.appid) >= 0;
                 game.index = Math.random();
-                return Ember.Object.create(game);
+                return EmberObject.create(game);
             });
             return {
                 games: data.filter((game) => {
