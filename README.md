@@ -2,7 +2,7 @@
 
 Browse and filter Steam games.  Display logo, description, and tags. Hide or star games.
 
-<img src="steam-library-screenshot.png"/>
+<img src="steam-library-screenshot.png" />
 
 Filter by
 
