@@ -32,4 +32,3 @@ Get list of games from [GetOwnedGames](https://developer.valvesoftware.com/wiki/
         },
     ]
 }
-````
