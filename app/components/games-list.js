@@ -1,17 +1,17 @@
 import Component from '@ember/component';
 
 export default Component.extend({
-    actions: {
-        filterTag: function(tag) {
-            this.sendAction('filterTag', tag);
-        },
+  actions: {
+    filterTag: function(tag) {
+      this.filterTag(tag);
+    },
 
-        toggleStar: function(game) {
-            this.sendAction('toggleStar', game);
-        },
+    toggleStar: function(game) {
+      this.toggleStar(game);
+    },
 
-        toggleHide: function(game) {
-            this.sendAction('toggleHide', game);
-        }
-    }
+    toggleHide: function(game) {
+      this.toggleHide(game);
+    },
+  },
 });

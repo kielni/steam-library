@@ -5,7 +5,7 @@ body {
 }
 
 .players-icon {
-    font-size: 24px;
+    font-size: 16px;
 }
 
 .description {
@@ -78,7 +78,12 @@ body {
 }
 
 .game-card .header .name {
-    width: 90%;
+    width: 85%;
+    height: 2.5em;
+}
+
+.game-card .header .players {
+    width: 12%;
     height: 2.5em;
 }
 

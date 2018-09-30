@@ -1,7 +1,6 @@
 'use strict';
 
 module.exports = function(environment) {
-<<<<<<< HEAD
   var ENV = {
     modulePrefix: 'steam-library',
     environment,
@@ -21,7 +20,8 @@ module.exports = function(environment) {
     APP: {
       // Here you can pass flags/options to your application instance
       // when it is created
-      LIBRARY: process.env.LIBRARY
+      //LIBRARY: process.env.LIBRARY
+      LIBRARY: 'https://megapis.s3.amazonaws.com/steam-library/library.json',
     }
   };
 
