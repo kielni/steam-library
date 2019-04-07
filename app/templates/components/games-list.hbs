@@ -4,8 +4,8 @@
     {{game-card
       game=game
       filterTag="filterTag"
-      toggleStar="toggleStar"
-      toggleHide="toggleHide"
+      toggleStar=(action toggleStar)
+      toggleHide=(action toggleHide)
     }}
   </div>
   {{/each}}
