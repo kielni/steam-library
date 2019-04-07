@@ -101,7 +101,7 @@ export default Controller.extend({
     return sorted.slice(0, 30).sort();
   }),
 
-  // 'user.{firstName,lastName}'
+  // eslint-disable-next-line ember/use-brace-expansion
   filteredGames: computed('filters.{players,played,tags}.[]', 'filters.{controller,starred}', 'model.games', 'model.games.@each.hidden', function filteredGames() {
     let filters = this.get('filters') || {};
     let filterFunctions = this.filterFunctions();
