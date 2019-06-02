@@ -1,12 +1,6 @@
 <div class="row">
 
-{{#vertical-collection
-    games
-    estimateHeight=400
-    bufferSize=6
-    staticHeight=false
-    containerSelector="body"
-    as |game|}}
+{{#each displayGames as |game|}}
   <div class="col-md-4">
     {{game-card
       game=game
@@ -15,5 +9,5 @@
       toggleHide=(action toggleHide)
     }}
   </div>
-{{/vertical-collection}}
+{{/each}}
 </div>
