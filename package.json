@@ -1,8 +1,8 @@
 {
   "name": "steam-library",
-  "version": "0.0.0",
+  "version": "0.2.0",
   "private": true,
-  "description": "Small description for steam-library goes here",
+  "description": "Display Steam library, with filters",
   "license": "MIT",
   "author": "",
   "directories": {
@@ -17,6 +17,7 @@
     "test": "ember test"
   },
   "devDependencies": {
+    "@html-next/vertical-collection": "^1.0.0-beta.13",
     "broccoli-asset-rev": "^2.4.5",
     "ember-ajax": "^3.0.0",
     "ember-cli": "~2.18.0",
@@ -37,7 +38,6 @@
     "ember-data": "~2.18.0",
     "ember-export-application-global": "^2.0.0",
     "ember-load-initializers": "^1.0.0",
-    "ember-radio-button": "1.0.7",
     "ember-resolver": "^4.0.0",
     "ember-source": "~2.18.0",
     "ember-welcome-page": "^3.0.0",
@@ -46,5 +46,6 @@
   },
   "engines": {
     "node": "^4.5 || 6.* || >= 7.*"
-  }
+  },
+  "dependencies": {}
 }
