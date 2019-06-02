@@ -21,6 +21,7 @@ export default Route.extend({
         game.starred = starred.indexOf(game.appid) >= 0;
         game.hidden = hidden.indexOf(game.appid) >= 0;
         game.index = Math.random();
+        game.url = `https://store.steampowered.com/app/${game.appid}`;
         return EmberObject.create(game);
       });
       return {
