@@ -79,7 +79,8 @@ body {
 
 .game-card .header .name {
     width: 85%;
-    height: 2.5em;
+    height: 2.8em;
+    overflow-y: hidden;
 }
 
 .game-card .header .players {
