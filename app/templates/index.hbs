@@ -1,7 +1,7 @@
 <div id="wrapper">
   <div id="sidebar-wrapper" class="sidebar">
     {{filter-bar
-      filter=(action "onFilter")
+      filterTag=(action "selectTags")
       games=filteredGames
       tags=topTags
       filters=filters
@@ -12,7 +12,7 @@
       <div class="row">
         {{games-list
           games=filteredGames
-          filterTag=(action "filterTag")
+          filterTag=(action "clickTag")
           toggleStar=(action "toggleStar")
           toggleHide=(action "toggleHide")
         }}

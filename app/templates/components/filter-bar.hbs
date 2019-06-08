@@ -39,10 +39,13 @@
 
 <div class="filter tags">
   <h4>Tags</h4>
-  <select id="tagSelect" multiple="multiple">
-    {{#each tags as |tag|}}
-    <option>{{tag}}</option>
-    {{/each}}
-  </select>
+  {{#power-select-multiple
+      options=tags
+      selected=filters.tags
+      onchange=(action filterTag)
+      renderInPlace=true
+      as |tag|}}
+    {{tag}}
+  {{/power-select-multiple}}
 </div>
 

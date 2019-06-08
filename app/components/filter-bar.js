@@ -14,10 +14,6 @@ export default Component.extend({
       on: '<i class="fa fa-star starred" />',
       off: '<i class="fa fa-star-half-full starred" />',
     });
-    this.set('tagSelect', $('#tagSelect').select2({tags: true}));
-    $('#tagSelect').on('change', run.bind(this, this.selectTag));
-    run.bind(this, this.changeTag)
-    this.tagsUpdate();
     this.setInitialState();
   },
 
@@ -30,16 +26,6 @@ export default Component.extend({
     }
     this.filter('tags', select);
   },
-
-  tagsUpdate: observer('filters.tags.[]', function tagsUpdate() {
-    let select = this.get('tagSelect');
-    let selected = select.val();
-    if (selected.toString() === (this.get('filters.tags') || []).toString()) {
-        return;
-    }
-    select.val(this.get('filters.tags'));
-    select.trigger('change');
-  }),
 
   setInitialState: function() {
     let players = this.get('filters.players') || [];

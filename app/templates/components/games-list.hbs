@@ -4,9 +4,9 @@
   <div class="col-md-4">
     {{game-card
       game=game
-      filterTag="filterTag"
-      toggleStar=(action toggleStar)
-      toggleHide=(action toggleHide)
+      filterTag=(action "filterTag")
+      toggleStar=(action "toggleStar")
+      toggleHide=(action "toggleHide")
     }}
   </div>
 {{/each}}

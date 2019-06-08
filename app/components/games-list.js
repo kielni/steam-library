@@ -15,7 +15,8 @@ export default Component.extend({
     } else {
       this.set('displayGames', all.slice(0, size * 2));
       this.set('start', (new Date()).getTime());
-      this.incrementalRender(size * 2);
+      this.set('renderSize', Math.ceil(all.length / 4))
+      this.incrementalRender(this.get('renderSize'));
     }
   },
 
@@ -28,7 +29,7 @@ export default Component.extend({
       console.log(`incrementalRender to ${size} (${elapsed}s)`);
       this.set('displayGames', all.slice(0, size));
       if (size < all.length) {
-        this.incrementalRender(size + this.get('pageSize') * 2);
+        this.incrementalRender(size + this.get('renderSize'));
       } else {
         this.set('fullyRendered', true);
         console.log(`fully rendered in ${elapsed}s`);

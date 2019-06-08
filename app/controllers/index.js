@@ -23,7 +23,8 @@ export default Controller.extend({
     "tags": ["Singleplayer","Multiplayer", "Co-op"]
     "features": ["Co-op"]
     */
-    var data = (game.get('players') || []).concat(game.get('tags') || []).concat(game.get('features') || []);
+    const data = (game.get('players') || []).concat(game.get('tags') || []).concat(game.get('features') || []);
+
     return value.find((val) => {
       if (val === 'coop') {
         return data.indexOf('Co-op') >= 0;
@@ -39,7 +40,8 @@ export default Controller.extend({
     if (!isSupported) {
       return true;
     }
-    var features = (game.get('features') || []).concat(game.get('tags') || []);
+    const features = (game.get('features') || []).concat(game.get('tags') || []);
+
     return features.find((f) => {
       return f.toLowerCase().indexOf('controller') >= 0;
     });
@@ -58,14 +60,16 @@ export default Controller.extend({
     return playtime <= 15;
   },
 
-  filterTags(game, values) {
-    if (!values || values.length === 0) {
+  filterTags(game, wantTags) {
+    if (!wantTags || wantTags.length === 0) {
       return true;
     }
-    var data = (game.get('tags') || []).concat(game.get('genres') || []);
-    return values.find((val) => {
-      return data.indexOf(val) >= 0;
-    });
+    const gameTags = new Set((game.get('tags') || []).concat(game.get('genres') || []));
+    const hasTags = wantTags.filter(tag => gameTags.has(tag));
+
+    console.log(`${game.get('name')}\twant ${wantTags} (${wantTags.length}) has=${hasTags} (${hasTags.length})`);
+    // game must have all selected tags
+    return hasTags.length === wantTags.length;
   },
 
   filterStarred(game, isStarred) {
@@ -118,20 +122,25 @@ export default Controller.extend({
     });
   }),
 
-  actions: {
-    onFilter(key, value) {
-      console.log('onFilter: filters=', this.get('filters'));
-      console.log(`onFilter key=${key} value=${value}`);
-      this.set(`filters.${key}`, value);
+  saveFilters() {
       localStorage.setItem('filters', JSON.stringify(this.get('filters')));
-    },
+  },
 
-    filterTag(tag) {
+  actions: {
+    clickTag(tag) {
+      console.log('clickTag', tag);
       let tags = this.get('filters.tags') || [];
       if (tags.indexOf(tag) >= 0) {
         return;
       }
       this.set('filters.tags', tags.concat(tag));
+      this.saveFilters();
+    },
+
+    selectTags(tags) {
+      console.log('selectTags', tags);
+      this.set('filters.tags', tags);
+      this.saveFilters();
     },
 
     toggleStar(game) {

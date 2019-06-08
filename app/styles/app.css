@@ -117,37 +117,21 @@ body {
     color: #aaffaa;
 }
 
-#tagSelect {
-    width: 95%;
-    font-size: 14px;
-}
-
-.select2 {
-    font-size: 0.8em;
-}
-
-.select2-container--default .select2-selection--multiple {
+.ember-power-select-trigger {
     background-color: #1c1e22;
     color: #fff;
 }
 
-.select2-container--default.select2-container--focus .select2-selection--multiple {
-    border: 0;
-}
-
-.select2-container--default .select2-selection--multiple .select2-selection__choice {
+.ember-power-select-option, .ember-power-select-option[aria-current="true"] {
     background-color: #3a3f44;
-}
-
-.select2-dropdown {
-    background-color: #8a9196;
     color: #fff;
     font-size: 0.8em;
 }
 
-.select2-container--default .select2-results__option[aria-selected=true] {
-    background-color: #8a9196;
-    color: #aaffaa;
+.ember-power-select-multiple-option {
+    background-color: #3a3f44;
+    color: #ffffff;
+    font-size: 0.8em;
 }
 
 .starred {
