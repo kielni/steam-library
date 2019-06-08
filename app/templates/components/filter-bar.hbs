@@ -2,38 +2,38 @@
 
 <div class="filter">
   <div class="btn-group players" data-toggle="buttons">
-    <label class="btn btn-primary {{if singleChecked 'active'}}" {{action "clickPlayers" "single"}}>
-      {{input type="checkbox" id="singlePlayer" checked=singleChecked}} Single
+    <label class="btn btn-primary {{if singleChecked 'active'}}">
+      <input type="checkbox" id="singlePlayer" checked={{singleChecked}} onchange={{action "clickPlayers" "single"}} value="target.value"> Single
     </label>
-    <label class="btn btn-primary {{if multiChecked 'active'}}" {{action "clickPlayers" "multi"}}>
-      {{input type="checkbox" id="multiPlayer" checked=multiChecked}} Multiplayer
+    <label class="btn btn-primary {{if multiChecked 'active'}}">
+      <input type="checkbox" id="multiPlayer" checked={{multiChecked}} onchange={{action "clickPlayers" "multi"}} value="target.value"> Multiplayer
     </label>
-    <label class="btn btn-primary {{if coopChecked 'active'}}" {{action "clickPlayers" "coop"}}>
-      {{input type="checkbox" id="coop" checked=coopChecked}} Co-op
+    <label class="btn btn-primary {{if coopChecked 'active'}}">
+      <input type="checkbox" id="coop" checked={{coopChecked}} onchange={{action "clickPlayers" "coop"}} value="target.value"> Co-op
     </label>
   </div>
 </div>
 
 <div class="filter played">
   <div class="btn-group" data-toggle="buttons">
-    <label class="btn btn-primary {{if unplayedChecked 'active'}}" {{action "clickPlayed" false}}>
-      {{input type="checkbox" id="unplayed" checked=unplayedChecked}} Unplayed
+    <label class="btn btn-primary {{if unplayedChecked 'active'}}">
+      <input type="checkbox" id="unplayed" checked={{unplayedChecked}} onchange={{action "clickPlayed" false}}> Unplayed
     </label>
-    <label class="btn btn-primary {{if playedChecked 'active'}}" {{action "clickPlayed" true}}>
-      {{input type="checkbox" id="played" checked=playedChecked}} Played
+    <label class="btn btn-primary {{if playedChecked 'active'}}">
+      <input type="checkbox" id="played" checked={{playedChecked}} onchange={{action "clickPlayed" true}}> Played
     </label>
   </div>
 </div>
 
 <div class="filter controller">
-  <label class="checkbox-inline" {{action 'clickController'}}>
-    <input type="checkbox" data-toggle="toggle" checked={{filters.controller}}>
+  <label class="checkbox-inline">
+    <input type="checkbox" data-toggle="toggle" checked={{filters.controller}} onchange={{action "clickController"}}>
   </label>
 </div>
 
 <div class="filter star">
-  <label class="checkbox-inline" {{action 'clickStarred'}}>
-    <input type="checkbox" data-toggle="toggle" checked={{filters.starred}}>
+  <label class="checkbox-inline">
+    <input type="checkbox" data-toggle="toggle" checked={{filters.starred}} onchange={{action "clickStarred"}}>
   </label>
 </div>
 

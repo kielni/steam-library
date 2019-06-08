@@ -1,5 +1,6 @@
 import $ from 'jquery';
 import Component from '@ember/component';
+import { computed } from '@ember/object';
 
 export default Component.extend({
   didInsertElement() {
@@ -12,7 +13,6 @@ export default Component.extend({
       on: '<i class="fa fa-star starred" />',
       off: '<i class="fa fa-star-half-full starred" />',
     });
-    this.setInitialState();
   },
 
   selectTag() {
@@ -25,16 +25,17 @@ export default Component.extend({
     this.filter('tags', select);
   },
 
-  setInitialState: function() {
-    let players = this.get('filters.players') || [];
-    ['single', 'multi', 'coop'].forEach((p) => {
-        this.set(`${p}Checked`, players.indexOf(p) >= 0);
-    });
-    let played = this.get('filters.played') || [];
-    ['played', 'unplayed'].forEach((p) => {
-        this.set(`${p}Checked`, played.indexOf(p) >= 0);
-    });
-  },
+  singleChecked: computed('filters.players.[]', function single() {
+    return (this.get('filters.players') || []).indexOf('single') >= 0;
+  }),
+
+  multiChecked: computed('filters.players.[]', function multi() {
+    return (this.get('filters.players') || []).indexOf('multi') >= 0;
+  }),
+
+  coopChecked: computed('filters.players.[]', function coop() {
+    return (this.get('filters.players') || []).indexOf('coop') >= 0;
+  }),
 
   toggleListFilter(filter, value) {
     let current = this.get(`filters.${filter}`) || [];
