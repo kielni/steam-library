@@ -3,17 +3,18 @@ import { run } from '@ember/runloop';
 
 export default Component.extend({
   pageSize: 6,
-  fullyRendered: false,
+  rendered: 0,
 
   didReceiveAttrs() {
     const size = this.get('pageSize');
     const all = this.get('games') || [];
 
     this._super(...arguments);
-    if (this.get('fullyRendered')) {
+    if (this.get('rendered') === all.length) {
       this.set('displayGames', all);
     } else {
       this.set('displayGames', all.slice(0, size * 2));
+      this.set('rendered', this.get('displayGames.length'));
       this.set('start', (new Date()).getTime());
       this.set('renderSize', Math.ceil(all.length / 4))
       this.incrementalRender(this.get('renderSize'));
@@ -28,10 +29,10 @@ export default Component.extend({
 
       console.log(`incrementalRender to ${size} (${elapsed}s)`);
       this.set('displayGames', all.slice(0, size));
+      this.set('rendered', this.get('displayGames.length'));
       if (size < all.length) {
         this.incrementalRender(size + this.get('renderSize'));
       } else {
-        this.set('fullyRendered', true);
         console.log(`fully rendered in ${elapsed}s`);
       }
     });

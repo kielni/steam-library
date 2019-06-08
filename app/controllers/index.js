@@ -2,6 +2,8 @@ import { computed } from '@ember/object';
 import Controller from '@ember/controller';
 
 export default Controller.extend({
+  maxTags: 30,
+
   filterFunctions() {
     return {
       players: this.filterPlayers,
@@ -67,7 +69,7 @@ export default Controller.extend({
     const gameTags = new Set((game.get('tags') || []).concat(game.get('genres') || []));
     const hasTags = wantTags.filter(tag => gameTags.has(tag));
 
-    console.log(`${game.get('name')}\twant ${wantTags} (${wantTags.length}) has=${hasTags} (${hasTags.length})`);
+    //console.log(`${game.get('name')}\twant ${wantTags} (${wantTags.length}) has=${hasTags} (${hasTags.length})`);
     // game must have all selected tags
     return hasTags.length === wantTags.length;
   },
@@ -83,18 +85,31 @@ export default Controller.extend({
     return true;
   },
 
-  topTags: computed('filteredGames.{tags,genres}.@each', function topTags() {
+  topTags: computed('filteredGames.{tags,genres}.@each', 'filters.tags.[]', function topTags() {
     const tags = {};
     const games = (this.get('filteredGames') || []);
     const minCount = parseInt(games.length / 20);
+    // exclude tags that duplicate filters
+    const exclude = ['co-op', 'controller', 'mouse'];
 
     games.forEach((game) => {
+      if (game.get('hidden')) {
+          return;
+      }
       (game.get('tags') || []).forEach((tag) => {
+        const tagLower = tag.toLowerCase();
+
+        if (!exclude.find(t => tagLower.indexOf(t) >= 0)) {
           tags[tag] = (tags[tag] || 0) + 1;
+        }
       });
       (game.get('genres') || []).forEach((tag) => {
+        const tagLower = tag.toLowerCase();
+
+        if (!exclude.find(t => tagLower.indexOf(t) >= 0)) {
           tags[tag] = (tags[tag] || 0) + 1;
-      });
+        }
+     });
     });
 
     const popular = Object.keys(tags).filter((tag) => tags[tag] > minCount);
@@ -102,7 +117,10 @@ export default Controller.extend({
       return tags[a] > tags[b] ? -1 : tags[a] === tags[b] ? 0 : 1;
     });
     console.log(sorted.length, ' tags');
-    return sorted.slice(0, 30).sort();
+    // make sure any selected tags are included
+    const selected = this.get('filters.tags') || [];
+
+    return sorted.slice(0, this.get('maxTags') - selected.length).concat(selected).sort();
   }),
 
   // eslint-disable-next-line ember/use-brace-expansion
@@ -111,6 +129,7 @@ export default Controller.extend({
     let filterFunctions = this.filterFunctions();
 
     console.log('filter games: filters=', filters);
+    localStorage.setItem('filters', JSON.stringify(filters));
 
     return this.get('model.games').filter((game) => {
       if (game.get('hidden')) {
@@ -122,10 +141,6 @@ export default Controller.extend({
     });
   }),
 
-  saveFilters() {
-      localStorage.setItem('filters', JSON.stringify(this.get('filters')));
-  },
-
   actions: {
     clickTag(tag) {
       console.log('clickTag', tag);
@@ -134,13 +149,16 @@ export default Controller.extend({
         return;
       }
       this.set('filters.tags', tags.concat(tag));
-      this.saveFilters();
+    },
+
+    filter(name, values) {
+      console.log('filter ', name, values);
+      this.set(`filters.${name}`, values);
     },
 
     selectTags(tags) {
       console.log('selectTags', tags);
       this.set('filters.tags', tags);
-      this.saveFilters();
     },
 
     toggleStar(game) {

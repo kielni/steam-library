@@ -2,6 +2,7 @@
   <div id="sidebar-wrapper" class="sidebar">
     {{filter-bar
       filterTag=(action "selectTags")
+      filter=(action "filter")
       games=filteredGames
       tags=topTags
       filters=filters

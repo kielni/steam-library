@@ -1,7 +1,5 @@
 import $ from 'jquery';
-import { observer } from '@ember/object';
 import Component from '@ember/component';
-import { run } from '@ember/runloop';
 
 export default Component.extend({
   didInsertElement() {
