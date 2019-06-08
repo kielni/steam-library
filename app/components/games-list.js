@@ -16,7 +16,7 @@ export default Component.extend({
       this.set('displayGames', all.slice(0, size * 2));
       this.set('rendered', this.get('displayGames.length'));
       this.set('start', (new Date()).getTime());
-      this.set('renderSize', Math.ceil(all.length / 4))
+      this.set('renderSize', Math.max(size*10, Math.ceil(all.length / 4)));
       this.incrementalRender(this.get('renderSize'));
     }
   },
