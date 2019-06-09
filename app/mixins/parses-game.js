@@ -14,7 +14,7 @@ export default Mixin.create({
     game.playersIcon = (game.players || []).map((player) => this.iconMap()[player]);
     game.starred = starred.indexOf(game.appid) >= 0;
     game.hidden = hidden.indexOf(game.appid) >= 0;
-    game.index = Math.random();
+    game.index = Math.round(Math.random() * 10000);
     game.url = `https://store.steampowered.com/app/${game.appid}`;
 
     return EmberObject.create(game);

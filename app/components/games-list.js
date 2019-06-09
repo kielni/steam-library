@@ -10,7 +10,7 @@ export default Component.extend({
     const all = this.get('games') || [];
 
     this._super(...arguments);
-    if (this.get('rendered') === all.length) {
+    if (this.get('rendered') >= all.length) {
       this.set('displayGames', all);
     } else {
       this.set('displayGames', all.slice(0, size * 2));

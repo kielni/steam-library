@@ -33,12 +33,12 @@
         <a href="steam://run/{{game.appid}}" target="play" class="play btn btn-default"><i class="fa fa-play" /></a>
       </div>
       <div class="col-md-3 star text-center">
-        <button class="btn btn-default" {{action 'toggleStar'}}>
+        <button class="btn btn-default" id="star{{game.appid}}" {{action 'toggleStar'}}>
           <i class="fa {{starClass}}" />
         </button>
       </div>
       <div class="col-md-3 hidden-game text-center">
-        <button class="btn btn-default" {{action 'toggleHide'}} >
+        <button class="btn btn-default" id="hidden{{game.appid}}" {{action 'toggleHide'}} >
           <i class="fa {{hideClass}}"/>
         </button>
       </div>

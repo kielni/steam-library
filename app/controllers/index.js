@@ -180,6 +180,7 @@ export default Controller.extend({
       } else {
         saved.splice(saved.indexOf(game.get('appid')), 1);
       }
+      this.set('hiddenCount', saved.length);
       localStorage.setItem('hidden', JSON.stringify(saved));
     },
   },
