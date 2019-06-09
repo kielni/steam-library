@@ -3,9 +3,7 @@ import Controller from '@ember/controller';
 
 export default Controller.extend({
   filteredGames: computed('model.games.@each.hidden', function filteredGames() {
-    return this.get('model.games').filter((game) => {
-        return game.get('hidden');
-    });
+    return this.get('model.games').filter(game => game.get('hidden'));
   }),
 
   actions: {

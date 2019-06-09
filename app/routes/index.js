@@ -1,33 +1,20 @@
-import EmberObject from '@ember/object';
 import $ from 'jquery';
 import Route from '@ember/routing/route';
 import config from 'steam-library/config/environment';
+import ParsesGame from 'steam-library/mixins/parses-game';
 
-export default Route.extend({
+export default Route.extend(ParsesGame, {
   model() {
-    let hidden = JSON.parse(localStorage.getItem('hidden') || '[]');
-    let starred = JSON.parse(localStorage.getItem('starred') || '[]');
+    const hidden = JSON.parse(localStorage.getItem('hidden') || '[]');
+    const starred = JSON.parse(localStorage.getItem('starred') || '[]');
 
     console.log('loading', config.APP.LIBRARY);
-    const iconMap = {
-      single: 'fa-user',
-      multi: 'fa-users',
-    };
 
     return $.ajax(config.APP.LIBRARY).then((response) => {
-      let data = response.data.map((game) => {
-        // "players": "Single-player" || players": "Multi-player",
-        game.playersIcon = (game.players || []).map((player) => iconMap[player]);
-        game.starred = starred.indexOf(game.appid) >= 0;
-        game.hidden = hidden.indexOf(game.appid) >= 0;
-        game.index = Math.random();
-        game.url = `https://store.steampowered.com/app/${game.appid}`;
-        return EmberObject.create(game);
-      });
       return {
-        games: data.filter((game) => {
-          return !game.get('ageRestricted') && !game.get('hidden');
-        }).sortBy('index')
+        games: response.data.map(game => this.normalize(game, hidden, starred))
+          .filter(game => !game.get('ageRestricted') && !game.get('hidden'))
+          .sortBy('index')
       };
     });
   },
